@@ -1,0 +1,17 @@
+using ServicesWPF;
+
+<Button 
+	DockPanel.Dock="Right" 
+        Content="Экспорт в EXCEL" 
+        Command="{Binding ExportToExcelCommandVm}" 
+        CommandParameter="{Binding ElementName=mainGrid}" Margin="4"/>
+
+Во VM
+в конструкторе VM 
+ExportToExcelCommandVm = new CommandVm<object>("exportToExcel", ExportToExcel);
+
+        public void ExportToExcel(object parameter)
+        {
+            var fn = _openFileServiceWin.GetFreeFileName(Path.Combine(_tempPath, "tmp.xlsx"));
+            _exportGridServiceWpf.ExportToXls(parameter, fn);
+        }
