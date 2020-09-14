@@ -1,0 +1,18 @@
+<ListBox SelectionMode="Extended" ItemsSource="{Binding MyList}" Width="150">
+  <ListBox.ItemContainerStyle>
+    <Style TargetType="{x:Type ListBoxItem}">
+      <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
+    </Style>
+  </ListBox.ItemContainerStyle>
+</ListBox>
+
+
+<!--Add helper class https://dzone.com/articles/sync-multi-select-listbox-->
+<!-- add command -->
+<ListBox x:Name="myListBox" ItemsSource="{Binding SomeCollection}">
+   <i:Interaction.Triggers>
+      <i:EventTrigger EventName="SelectionChanged">
+        <i:InvokeCommandAction Command="{Binding SelectedItemChangedCommand}"  CommandParameter="{Binding ElementName=myListBox, Path=SelectedItem}"/>
+    </i:EventTrigger>
+  </i:Interaction.Triggers>
+</ListBox >
